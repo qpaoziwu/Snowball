@@ -52,6 +52,7 @@ public class Snowball : MonoBehaviour
                stackOffset = 1.4f;
                gameObject.GetComponent<SphereCollider>().enabled = false;
                gameObject.transform.position = new Vector3(stackPos.x, 1f+ stackPos.y/stackOffset, stackPos.z);
+
             }
             if(!moving)
             {
