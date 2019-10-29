@@ -25,60 +25,30 @@ public class Snowball : MonoBehaviour
     public float stackOffset;
     public bool stacked;
     public bool top;
-    public Transform snowball;
-    public Transform snowballWaypoint;
-    public Transform TargetSnowball;
+    public Vector3 lockPos;
 
-    void Start()
-    {
-    }
-    
     void Update()
     {
         PushCDTimer();
         IncreaseSizeWhenMoving();
         MoveCheck();
-        LockStackedPosition();
+        MoveToPos();
     }
 
-    //
-    void LockStackedPosition()
+    //Rolling On Snow Check
+    private void OnTriggerEnter(Collider other)
     {
 
         if (stacked)
         {
-            if (moving)
-            {
-               stackOffset = 1.4f;
-               gameObject.GetComponent<SphereCollider>().enabled = false;
-                gameObject.GetComponent<SphereCollider>().enabled = false;
-                gameObject.GetComponent<Rigidbody>().isKinematic = true;
-
-                gameObject.transform.position = new Vector3(stackPos.x+0.3f, size/2f+ incSnowball.transform.localScale.y/stackOffset, stackPos.z);
-
-            }
-            if(!moving)
-            {
-                gameObject.transform.position = gameObject.transform.position;
-            }
- 
-            
+            lockPos = gameObject.transform.position;
         }
-        else
-        {
-            //Lock Y Position relative to Scale
-            stackOffset = 3f;
-            gameObject.transform.position = new Vector3(transform.position.x, size / stackOffset, transform.position.z);
-        }
-    }
-    //Runs in OnTriggerEnter();
-    void CheckIncomingSnowball(Collider c)
-    {
+
         if (!stacked)
         {
-            if (c.gameObject.tag == "Snowball")
+            if (other.gameObject.tag == "Snowball")
             {
-                incSnowball = c.gameObject.GetComponent<Snowball>();
+                incSnowball = other.gameObject.GetComponent<Snowball>();
 
                 if (moving)
                 {
@@ -87,6 +57,60 @@ public class Snowball : MonoBehaviour
                 stackPos = incSnowball.transform.position;
                 stacked = true;
             }
+        }
+
+        if (Move_Player == null)
+        {
+            if (other.gameObject.tag == "Snow")
+            {
+                rollingOnSnow = true;
+                rollStart = gameObject.transform.position;
+
+            }
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (Move_Player != null)
+        {
+            if (collision.gameObject.tag == "Snow")
+            {
+                rollingOnSnow = true;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject.tag == "Snow")
+        {
+            rollingOnSnow = false;
+
+        }
+
+    }
+
+    //
+    void MoveToPos()
+    {
+        if (stacked)
+        {
+            if (moving)
+            {
+                stackOffset = 1.4f;
+                gameObject.GetComponent<SphereCollider>().enabled = false;
+                gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                lockPos = new Vector3(stackPos.x+0.3f, size/2f+ incSnowball.transform.localScale.y/stackOffset, stackPos.z);
+
+            }
+            if(!moving)
+            {
+                //Lock Position to self
+                gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                lockPos = gameObject.transform.position;
+            }
+        gameObject.transform.position = lockPos;
         }
     }
 
@@ -138,13 +162,14 @@ public class Snowball : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (!stacked)
+
+        if (Move_Player != null)
         {
-            if (Move_Player != null)
+            if (!stacked)
             {
                 if (other.gameObject.tag == "Player")
                 {
-                    this.transform.position += Move_Player.newDir * Time.deltaTime * Move_Player.moveSpeed * 0.5f;
+                    this.transform.position += Move_Player.newDir * Time.deltaTime * Move_Player.moveSpeed * 0.8f;
                 }
             }
         }
@@ -157,42 +182,6 @@ public class Snowball : MonoBehaviour
             {
                 onCD = false;
             }
-        }
-
-    }
-
-    //Rolling On Snow Check
-    private void OnTriggerEnter(Collider other)
-    {
-        CheckIncomingSnowball(other);
-        if (Move_Player == null)
-        {
-            if (other.gameObject.tag == "Snow")
-            {
-                rollingOnSnow = true;
-                rollStart = gameObject.transform.position;
-
-            }
-        }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (Move_Player != null)
-        {
-            if (collision.gameObject.tag == "Snow")
-            {
-                rollingOnSnow = true;
-
-            }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (other.gameObject.tag == "Snow")
-        {
-            rollingOnSnow = false;
-
         }
 
     }

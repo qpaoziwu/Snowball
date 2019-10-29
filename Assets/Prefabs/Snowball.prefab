@@ -123,9 +123,7 @@ MonoBehaviour:
   stackOffset: 0
   stacked: 0
   top: 0
-  snowball: {fileID: 0}
-  snowballWaypoint: {fileID: 0}
-  TargetSnowball: {fileID: 0}
+  lockPos: {x: 0, y: 0, z: 0}
 --- !u!54 &1136208477314910612
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +132,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136208477314910622}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 0
