@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1136208477314910615}
   m_Layer: 0
   m_Name: Snowball
-  m_TagString: Untagged
+  m_TagString: Snowball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136208477314910622}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
@@ -112,7 +112,7 @@ MonoBehaviour:
   Move_Player: {fileID: 0}
   size: 3
   rollingOnSnow: 1
-  increaseRate: 0.15
+  increaseRate: 0.25
   rollStart: {x: 0, y: 0, z: 0}
   snowballPushCD: 0.2
   timer: 0.2
@@ -140,7 +140,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!135 &1136208477314910615
 SphereCollider:

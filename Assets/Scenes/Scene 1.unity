@@ -776,11 +776,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snowball (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1136208477314910622, guid: 600ad00b730595945898babf94a20d50,
-        type: 3}
-      propertyPath: m_TagString
-      value: Snowball
-      objectReference: {fileID: 0}
     - target: {fileID: 1136208477314910618, guid: 600ad00b730595945898babf94a20d50,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -835,11 +830,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136208477314910612, guid: 600ad00b730595945898babf94a20d50,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 600ad00b730595945898babf94a20d50, type: 3}
