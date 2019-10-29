@@ -9,6 +9,11 @@ public class Move : MonoBehaviour
     [Range(1f, 10f)]
     public float xSpeedTuner;
 
+
+    public Vector3 dir;
+    public Vector3 dirRelativeToCamera;
+    public Vector3 newDir;
+
     public bool moving;
     void Update()
     {
@@ -18,9 +23,9 @@ public class Move : MonoBehaviour
     public void MoveObjectWithRotation()
     {
 
-        Vector3 dir = new Vector3((Input.GetAxis("Horizontal")), 0f, (Input.GetAxis("Vertical")));
-        Vector3 dirRelativeToCamera = Camera.main.transform.TransformDirection(dir);
-        Vector3 newDir = new Vector3 (dirRelativeToCamera.x * xSpeedTuner, 0f , dirRelativeToCamera.z);
+        dir = new Vector3((Input.GetAxis("Horizontal")), 0f, (Input.GetAxis("Vertical")));
+        dirRelativeToCamera = Camera.main.transform.TransformDirection(dir);
+        newDir = new Vector3 (dirRelativeToCamera.x * xSpeedTuner, 0f , dirRelativeToCamera.z);
 
         if (moving)
         {
