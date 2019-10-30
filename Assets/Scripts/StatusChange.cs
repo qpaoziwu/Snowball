@@ -13,7 +13,7 @@ public class StatusChange : MonoBehaviour
     [Range (0,1)]
     public float currentSpeed;
 
-    public bool timing;
+    private bool timing;
     private float timer;
 
     // Start is called before the first frame update
@@ -23,10 +23,6 @@ public class StatusChange : MonoBehaviour
         PlayerMovement = GetComponent<Move>();
     }
 
-    private void FixedUpdate()
-    {
-        Movement();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Bullet")
@@ -40,7 +36,7 @@ public class StatusChange : MonoBehaviour
         if (timing)
         {
             timer += Time.deltaTime;
-            currentSpeed = 1f -(( slowDuration- timer ) / slowDuration);
+            currentSpeed = slowDuration / timer;
             if (timer > slowDuration)
             {
                 timing = false;
@@ -53,5 +49,9 @@ public class StatusChange : MonoBehaviour
 
     }
 
-
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
