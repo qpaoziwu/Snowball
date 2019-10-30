@@ -13,13 +13,10 @@ public class Snowball_Stack : MonoBehaviour
     public bool top;
     public Vector3 lockPos;
 
-   // public Animator anim;
-   // public Collider c;
+    public bool inSafeZone;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //anim = GetComponent<Animator>();
         if (thisSnowball != null)
         {
             thisSnowball = gameObject.GetComponent<Snowball_Roll>();
@@ -30,64 +27,73 @@ public class Snowball_Stack : MonoBehaviour
     void Update()
     {
         StackToPos();
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (stacked)
-        //{
-        //    lockPos = gameObject.transform.position;
-        //}
-
         if (!stacked)
         {
             if (other.gameObject.tag == "Snowball")
             {
                 incSnowball = other.gameObject.GetComponent<Snowball_Stack>();
-                if (!incSnowball.stacked)
+
+                if (thisSnowball.moving && !incSnowball.stacked)
+                // if (thisSnowball.moving && !incSnowball.stacked)
+
                 {
-                    if (thisSnowball.moving)
-                    {
-                        top = true;
-                    }
-                    stackPos = incSnowball.transform.position;
                     stacked = true;
+                    lockPos = gameObject.transform.position;
                 }
             }
         }
+        //if (stacked)
+        //{
+        //    this.enabled = false;
+        //}
+
     }
 
     void StackToPos()
     {
+        if (incSnowball != null)
+        {
+            if (incSnowball.transform.position.y > gameObject.transform.position.y+1f)
+            {
+                stacked = true;
+            }
+        }
         if (stacked)
         {
-            lockPos = incSnowball.transform.position;
-            gameObject.transform.position = lockPos;
-            //c.enabled = false;
-            if (thisSnowball.moving)
-            {
-                if (top)
-                {
-                    stackOffset = 1.4f;
-                    gameObject.GetComponent<SphereCollider>().enabled = false;
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            
+            stackPos = incSnowball.transform.position;
 
-                    lockPos = new Vector3(stackPos.x + 0.3f, gameObject.transform.localScale.y / 2f + incSnowball.transform.localScale.y / stackOffset, stackPos.z);
-                    
-                }
+
+            if (thisSnowball.moving && !incSnowball.stacked)
+            {
+                top = true;
+
+                stackOffset = 1.4f;
+                gameObject.GetComponent<SphereCollider>().enabled = false;
+                gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                lockPos = new Vector3(stackPos.x + 0.3f, gameObject.transform.localScale.y / 2f + incSnowball.transform.localScale.y / stackOffset, stackPos.z);
+
             }
             if (!thisSnowball.moving)
             {
-                //Lock Position to self
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                lockPos = gameObject.transform.position;
-                //anim.SetBool(1, true);
-                //c.enabled = false;
+                //Lock Position to self
+                gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+                //lockPos = gameObject.transform.position;
+
             }
 
+            thisSnowball.enabled = false;
+            gameObject.transform.position = lockPos;
 
-            
         }
+
+
     }
 }

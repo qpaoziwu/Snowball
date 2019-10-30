@@ -31,31 +31,6 @@ public class Snowball_Roll : MonoBehaviour
     }
 
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (stacked)
-    //    {
-    //        lockPos = gameObject.transform.position;
-    //    }
-
-    //    if (!stacked)
-    //    {
-    //        if (other.gameObject.tag == "Snowball")
-    //        {
-    //            incSnowball = other.gameObject.GetComponent<Snowball_Roll>();
-
-    //            if (moving)
-    //            {
-    //                top = true;
-    //            }
-    //            stackPos = incSnowball.transform.position;
-    //            stacked = true;
-    //        }
-    //    }
-    //}
-
-
-    //
 
 
     //MovementCheck
@@ -111,6 +86,10 @@ public class Snowball_Roll : MonoBehaviour
                 Move_Player = collision.gameObject.GetComponent<Move>();
                 onCD = false;
             }
+        }
+        if(collision.gameObject.tag == "Safe_Zone")
+        {
+            gameObject.GetComponent<Snowball_Stack>().enabled = true;
         }
 
     }
