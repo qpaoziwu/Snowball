@@ -11,6 +11,7 @@ public class ShootingSnow : MonoBehaviour
     public BoxCollider checkBox;
     public Transform shootLocation;
     public bool blocked;
+
     //[SerializeField]
     //float Fire_Delay;
     //[SerializeField]

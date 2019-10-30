@@ -23,6 +23,12 @@ public class StatusChange : MonoBehaviour
         PlayerMovement = GetComponent<Move>();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        Movement();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Bullet")
@@ -49,9 +55,4 @@ public class StatusChange : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Movement();
-    }
 }
