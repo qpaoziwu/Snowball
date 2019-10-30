@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Green
-  - Kid
   - Snowball
   - Bullet
+  - Snow
+  - Safe_Zone
   layers:
   - Default
   - TransparentFX
@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - Post Processing
-  - test
+  - Oblivion
   - 
   - 
   - 
