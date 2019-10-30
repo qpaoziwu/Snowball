@@ -47,7 +47,11 @@ MonoBehaviour:
     type: 3}
   Snowball: {fileID: 1136208477314910622, guid: 600ad00b730595945898babf94a20d50,
     type: 3}
+  checkBox: {fileID: 0}
   shootLocation: {fileID: 2381590098420884287}
+  blocked: 0
+  shoot: 0
+  gather: 0
   ammoCap: 1
   currentAmmo: 0
   ThrowForce: 10
@@ -176,6 +180,7 @@ MonoBehaviour:
   slowedMoveSpeed: 3
   slowDuration: 2
   currentSpeed: 0
+  timing: 0
 --- !u!1001 &8707739090863906817
 PrefabInstance:
   m_ObjectHideFlags: 0

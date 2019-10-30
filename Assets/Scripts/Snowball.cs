@@ -26,6 +26,7 @@ public class Snowball : MonoBehaviour
     public bool stacked;
     public bool top;
     public Vector3 lockPos;
+    public GameObject blocker;
 
     void Update()
     {
@@ -111,6 +112,11 @@ public class Snowball : MonoBehaviour
                 lockPos = gameObject.transform.position;
             }
         gameObject.transform.position = lockPos;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+            blocker.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 
