@@ -115,7 +115,7 @@ MonoBehaviour:
   increaseRate: 0.25
   rollStart: {x: 0, y: 0, z: 0}
   snowballPushCD: 0.2
-  timer: 0.2
+  timer: 0
   onCD: 0
   moving: 0
   incSnowball: {fileID: 0}
