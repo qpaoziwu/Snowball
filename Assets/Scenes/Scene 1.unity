@@ -1719,6 +1719,16 @@ PrefabInstance:
       propertyPath: tempBall
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4027719780498404504, guid: a32fb27a5462f564f8b6a3a7b70efc7e,
+        type: 3}
+      propertyPath: currentSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381590098420884287, guid: a32fb27a5462f564f8b6a3a7b70efc7e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a32fb27a5462f564f8b6a3a7b70efc7e, type: 3}
 --- !u!1 &1740357017

@@ -13,7 +13,7 @@ public class StatusChange : MonoBehaviour
     [Range (0,1)]
     public float currentSpeed;
 
-    private bool timing;
+    public bool timing;
     private float timer;
 
     // Start is called before the first frame update
@@ -36,7 +36,7 @@ public class StatusChange : MonoBehaviour
         if (timing)
         {
             timer += Time.deltaTime;
-            currentSpeed = slowDuration / timer;
+            currentSpeed = 1f - ((slowDuration - timer) / slowDuration);
             if (timer > slowDuration)
             {
                 timing = false;
@@ -52,6 +52,6 @@ public class StatusChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Movement();
     }
 }

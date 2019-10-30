@@ -8,17 +8,19 @@ public class ShootingSnow : MonoBehaviour
     //public SnowShot SnowShot;
     public GameObject Snowshot;
     public GameObject Snowball;
+    public BoxCollider checkBox;
     public Transform shootLocation;
+    public bool blocked;
     //[SerializeField]
     //float Fire_Delay;
     //[SerializeField]
     //float Fire_Rate;
-    [SerializeField]
-    int ammoCap;
-    [SerializeField]
-    int currentAmmo;
-    [SerializeField]
-    int ThrowForce;
+    public KeyCode shoot;
+    public KeyCode gather;
+
+    public int ammoCap;
+    public int currentAmmo;
+    public int ThrowForce;
 
     public GameObject tempBall;
 
@@ -26,16 +28,26 @@ public class ShootingSnow : MonoBehaviour
     public float coolDown;
 
 
-    void Awake() {
+    void Start() {
+        ammoCap = 1;
+
         //PlayerReference = GetComponent<Move>();
         //SnowShot = GetComponent<SnowShot>();
     }
-
     void Update()
     {
         Timer();
         PlayerInput();
-    } // Update End
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject) blocked = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject) blocked = false;
+    }
 
     void Timer()
     {
@@ -44,25 +56,8 @@ public class ShootingSnow : MonoBehaviour
     }
     void PlayerInput()
     {
-        if (Input.GetKeyDown(KeyCode.E) && shootTimer < 0) Shoot();
-        if (Input.GetKeyDown(KeyCode.F) && shootTimer < 0) Gather();
-
-        //else
-        //{
-        //if (Input.GetKeyDown(KeyCode.E) && Time.time > Fire_Delay && Fire_Rate > 0 && Current_Magazine_Cap > 0)
-        //if (Input.GetKeyDown(KeyCode.E) && shootTimer < 0 && Fire_Rate > 0 && Current_Magazine_Cap > 0)
-        //{
-        //    Debug.Log("Throw");
-        //    shootTimer = coolDown;
-        //    Shoot();
-        //    Current_Magazine_Cap--;
-        //}
-        //else if (Current_Magazine_Cap == 0) Debug.Log("No Snowball!");
-
-        //Fire_Rate = Fire_Delay;
-        //} // else end
-
-
+        if (Input.GetKeyDown(shoot) && shootTimer < 0) Shoot();
+        if (Input.GetKeyDown(gather) && shootTimer < 0) Gather();
     }
     void Gather()
     {
@@ -75,8 +70,10 @@ public class ShootingSnow : MonoBehaviour
         {
             if (Snowball != null)
             {
-                Instantiate(Snowball, transform.position, Quaternion.identity);
-                currentAmmo--;
+                if (!blocked) {
+                    Instantiate(Snowball, transform.position + Vector3.up, Quaternion.identity);
+                    currentAmmo--;
+                }
             }
         } else if (currentAmmo < ammoCap)
         {
