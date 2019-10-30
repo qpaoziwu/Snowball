@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4395513043528498222}
   - component: {fileID: 5417451503446153437}
+  - component: {fileID: 6548890243826714656}
+  - component: {fileID: 357788421800662395}
   m_Layer: 0
   m_Name: Shooter
   m_TagString: Untagged
@@ -47,13 +49,46 @@ MonoBehaviour:
     type: 3}
   Snowball: {fileID: 1136208477314910622, guid: 600ad00b730595945898babf94a20d50,
     type: 3}
+  checkBox: {fileID: 6548890243826714656}
   shootLocation: {fileID: 2381590098420884287}
+  blocked: 0
+  shoot: 102
+  gather: 32
   ammoCap: 1
   currentAmmo: 0
   ThrowForce: 10
   tempBall: {fileID: 0}
   shootTimer: 0
   coolDown: 0.2
+--- !u!65 &6548890243826714656
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943418911097655487}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.5, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &357788421800662395
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943418911097655487}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &6516376722278090672
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6516376722278090672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.8}
+  m_LocalPosition: {x: 0, y: 1, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8707739091230790499}
@@ -96,7 +131,9 @@ GameObject:
   - component: {fileID: 8707739091230790508}
   - component: {fileID: 8707739091230790509}
   - component: {fileID: 4027719780498404504}
-  m_Layer: 0
+  - component: {fileID: 151854923}
+  - component: {fileID: 151854925}
+  m_Layer: 5
   m_Name: Player_
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -112,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 8707739091230790498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
   - {fileID: 8489717314855198247}
   - {fileID: 4395513043528498222}
@@ -153,12 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c69681caa0fe8468aa1dc24c223aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6.5
+  moveSpeed: 6.7
   xSpeedTuner: 5
   dir: {x: 0, y: 0, z: 0}
   dirRelativeToCamera: {x: 0, y: 0, z: 0}
   newDir: {x: 0, y: 0, z: 0}
-  moving: 0
+  moving: 1
 --- !u!114 &4027719780498404504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,10 +209,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 8707739091230790509}
-  MaxSpeed: 6.5
-  slowedMoveSpeed: 3
+  MaxSpeed: 7
+  slowedMoveSpeed: 2
   slowDuration: 2
-  currentSpeed: 0
+  currentSpeed: 1
+  timing: 0
+--- !u!54 &151854923
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707739091230790498}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!136 &151854925
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707739091230790498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8707739090863906817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,6 +309,21 @@ PrefabInstance:
     - target: {fileID: 939443056691953190, guid: b30c7bbd6b4600048becc247695ccb85,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939443056691953189, guid: b30c7bbd6b4600048becc247695ccb85,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 939443056691953188, guid: b30c7bbd6b4600048becc247695ccb85,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939443056691953188, guid: b30c7bbd6b4600048becc247695ccb85,
+        type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
